@@ -1,0 +1,26 @@
+{
+  "name": "wintd-server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "@afazzdev",
+  "license": "MIT",
+  "private": true,
+  "engines": {
+    "node": "^12.18.3",
+    "yarn": "^1.22.5"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "glob": "^7.1.6",
+    "pg": "^8.3.3",
+    "sequelize": "^6.3.5"
+  },
+  "scripts": {
+    "start": "NODE_ENV=production node index.js",
+    "dev": "nodemon index.js",
+    "migrate": "sequelize db:migrate",
+    "migrate:undo": "sequelize db:migrate:undo",
+    "migrate:undo:all": "sequelize db:migrate:undo:all"
+  }
+}
