@@ -1,10 +1,15 @@
+import { catchAsync } from "../../utils/catchAsync";
+import authController from "../auth";
 import BaseRouter from "../base/baseRouter";
 import userController from "./userController";
 
 class UserRouter extends BaseRouter {
   routes(): void {
-    this.router.post("/signup", userController.signUp);
-    this.router.post("/signin", userController.signIn);
+    this.router.post("/signup", catchAsync(authController.signUp));
+    this.router.post("/signin", catchAsync(authController.signIn));
+
+    this.router.route("/:id").get(catchAsync(userController.getUser));
+    this.router.route("/").get(catchAsync(userController.getUsers));
   }
 }
 

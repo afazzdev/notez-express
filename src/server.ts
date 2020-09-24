@@ -12,7 +12,7 @@ process.on("uncaughtException", (err) => {
 });
 
 // Default port
-const PORT = process.env.NODE_ENV === "production" ? process.env.PORT : 5000;
+const PORT = process.env.PORT || 5000;
 
 // Create server
 let server: { close: (arg0: () => never) => void } = app.listen(PORT, () => {

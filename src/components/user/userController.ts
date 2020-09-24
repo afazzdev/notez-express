@@ -1,17 +1,20 @@
 import { Request, Response } from "express";
-import userServices from "./userServices";
+import { ok } from "../../utils/responseJson";
+import userService from "./userService";
 
 class UserController {
-  async signUp(req: Request, res: Response) {
-    const newUser = await userServices.signUp(req.body);
+  async getUsers(req: Request, res: Response) {
+    const users = await userService.getUsers(req.query);
 
-    return res.json(newUser);
+    return ok(res, {
+      data: users,
+    });
   }
 
-  async signIn(req: Request, res: Response) {
-    const newUser = await userServices.signIn(req.body);
-
-    return res.json(newUser);
+  async getUser(req: Request, res: Response) {
+    return ok(res, {
+      data: req.user,
+    });
   }
 }
 

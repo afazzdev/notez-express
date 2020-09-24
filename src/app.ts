@@ -6,10 +6,9 @@ import morgan from "morgan";
 import note from "./components/note";
 import user from "./components/user";
 import globalErrorHandler from "./components/error";
-import AppError from "./utils/AppError";
-import passportInit from "./config/passport";
 
-// import passportInit from "./config/passport";
+import AppError from "./utils/AppError";
+import passport from "./config/passport";
 
 class App {
   app: Application;
@@ -31,7 +30,7 @@ class App {
     this.app.use(express.json({ limit: "10kb" }));
 
     // Passport initialize
-    this.app.use(passportInit());
+    this.app.use(passport.initialize());
 
     if (process.env.NODE_ENV !== "production") {
       this.app.use(morgan("dev"));
@@ -39,8 +38,8 @@ class App {
   }
 
   routes() {
-    this.app.use("/api/note", note);
-    this.app.use("/api/user", user);
+    this.app.use("/api/notes", note);
+    this.app.use("/api/users", user);
 
     this.app.all("*", (req, _, next) => {
       next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));

@@ -1,3 +1,1 @@
-import error from "./errorRoutes";
-
-export default error;
+export { default } from "./errorRoutes";

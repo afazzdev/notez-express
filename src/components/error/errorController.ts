@@ -12,7 +12,7 @@ class ErrorController {
     });
   }
 
-  sendErrorProd = (err: IError, res: Response) => {
+  sendErrorProd(err: IError, res: Response) {
     if (err.isOperational) {
       res.status(err.statusCode).json({
         status: err.status,
@@ -28,7 +28,7 @@ class ErrorController {
         message: "Something went wrong!",
       });
     }
-  };
+  }
 }
 
 export default new ErrorController();

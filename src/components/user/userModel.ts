@@ -1,5 +1,7 @@
 import { Model, DataTypes, Optional } from "sequelize";
-import { sequelize } from "../../models";
+import bcrypt from "bcrypt";
+import { sequelize } from "../../config/sequelize";
+import AppError from "../../utils/AppError";
 
 export interface UserAttributes {
   id: number;
@@ -19,6 +21,20 @@ export class User
 
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
+
+  // Check if the saved password and request password is the same
+  correctPassword = async function (
+    candidatePassword: string,
+    userPassword: string,
+  ) {
+    // console.log(candidatePassword, userPassword);
+    try {
+      const compare = await bcrypt.compare(candidatePassword, userPassword);
+      return compare;
+    } catch (err) {
+      throw new AppError("Error when checking password!", 500);
+    }
+  };
 }
 
 User.init(
@@ -42,5 +58,30 @@ User.init(
       allowNull: false,
     },
   },
-  { sequelize, modelName: "user" },
+  {
+    sequelize,
+    modelName: "user",
+    paranoid: true,
+    underscored: true,
+    defaultScope: {
+      attributes: {
+        exclude: ["password"],
+      },
+    },
+  },
 );
+
+const hashPassword = async (user: any) => {
+  if (!user.changed("password")) {
+    return;
+  }
+
+  // hash the password with the cost of 12
+  await bcrypt
+    .hash(user.password, 12)
+    .then((hash: any) => (user.password = hash));
+};
+
+//  hash the password
+User.beforeCreate(hashPassword);
+User.beforeUpdate(hashPassword);

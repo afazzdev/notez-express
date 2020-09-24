@@ -1,5 +1,5 @@
 import { Model, DataTypes, Optional } from "sequelize";
-import { sequelize } from "../../models";
+import { sequelize } from "../../config/sequelize";
 
 interface NoteAttributes {
   id: number;
