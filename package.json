@@ -1,5 +1,5 @@
 {
-  "name": "wintd-server",
+  "name": "notez-server",
   "version": "1.0.0",
   "main": "build/server.js",
   "author": "@afazzdev",
@@ -7,7 +7,7 @@
   "private": true,
   "engines": {
     "node": "^12.18.3",
-    "yarn": "^1.22.5"
+    "yarn": "^1.22"
   },
   "dependencies": {
     "bcrypt": "^5.0.0",
