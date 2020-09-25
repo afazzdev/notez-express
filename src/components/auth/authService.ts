@@ -22,7 +22,7 @@ class AuthService {
       return newUser;
     } catch (error) {
       console.trace("SignUp error: ", error);
-      throw new AppError(error.errors[0].message, 400);
+      throw new AppError("Something were wrong", 400);
     }
   }
 
