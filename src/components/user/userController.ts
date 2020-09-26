@@ -16,6 +16,14 @@ class UserController {
       data: req.user,
     });
   }
+
+  async getProfile(req: Request, res: Response) {
+    const user = await userService.getProfile(req.user?.id!);
+
+    return ok(res, {
+      data: user,
+    });
+  }
 }
 
 export default new UserController();

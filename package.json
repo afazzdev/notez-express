@@ -1,5 +1,5 @@
 {
-  "name": "notez-server",
+  "name": "notez-express",
   "version": "1.0.0",
   "main": "build/server.js",
   "author": "@afazzdev",
@@ -38,6 +38,7 @@
     "@types/node": "^14.11.2",
     "@types/passport": "^1.0.4",
     "@types/passport-jwt": "^3.0.3",
+    "kill-port": "^1.6.1",
     "morgan": "^1.10.0",
     "sequelize-cli": "^6.2.0",
     "ts-node": "^9.0.0",

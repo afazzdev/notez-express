@@ -7,6 +7,18 @@ class UserServices {
 
     return users;
   }
+
+  async getUser(pk: number): Promise<User | null> {
+    const user = await User.findByPk(pk);
+
+    return user;
+  }
+
+  async getProfile(id: number) {
+    const user = await this.getUser(id);
+
+    return user;
+  }
 }
 
 export default new UserServices();
