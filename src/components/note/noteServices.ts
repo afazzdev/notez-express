@@ -1,3 +1,4 @@
+import AppError from "../../utils/AppError";
 import { Note } from "./noteModel";
 
 class NoteServices {
@@ -23,6 +24,20 @@ class NoteServices {
     const note = await Note.create(rawData);
 
     return note;
+  }
+
+  async editNote(id: string, userId: string, body: any) {
+    const note = await this.getNote(id);
+    if (note?.userId === userId) {
+      await note.update(body);
+
+      return note;
+    } else {
+      throw new AppError(
+        "Anda tidak memiliki akses untuk melakukan perintah ini!",
+        400,
+      );
+    }
   }
 }
 

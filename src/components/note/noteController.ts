@@ -22,6 +22,18 @@ class NoteController {
       data: note,
     });
   }
+
+  async editNote(req: Request, res: Response) {
+    const edittedNote = await noteServices.editNote(
+      req.params.id,
+      req.user?.id!,
+      req.body,
+    );
+
+    return ok(res, {
+      data: edittedNote,
+    });
+  }
 }
 
 export default new NoteController();

@@ -6,7 +6,10 @@ import { authController } from "../user";
 
 class NoteRoutes extends BaseRouter {
   routes(): void {
-    this.router.route("/:id").get(catchAsync(noteController.getNote));
+    this.router
+      .route("/:id")
+      .get(catchAsync(noteController.getNote))
+      .patch(authController.authenticate, catchAsync(noteController.editNote));
     this.router
       .route("/")
       .get(catchAsync(noteController.getNotes))
