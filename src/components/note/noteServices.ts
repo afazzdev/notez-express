@@ -16,6 +16,14 @@ class NoteServices {
 
     return note;
   }
+
+  async createNote(id: string, body: any) {
+    const rawData = { ...body };
+    rawData.userId = id;
+    const note = await Note.create(rawData);
+
+    return note;
+  }
 }
 
 export default new NoteServices();
