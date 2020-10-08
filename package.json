@@ -24,6 +24,7 @@
   "scripts": {
     "start": "NODE_ENV=production node build/index.js",
     "dev": "NODE_ENV=development nodemon -r dotenv/config src/server.ts",
+    "dev:prod": "NODE_ENV=production nodemon -r dotenv/config src/server.ts",
     "build": "yarn clean && tsc -p .",
     "clean": "rm -rf build",
     "migrate": "sequelize db:migrate",
