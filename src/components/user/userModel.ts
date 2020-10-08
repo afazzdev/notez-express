@@ -65,7 +65,7 @@ User.init(
     underscored: true,
     defaultScope: {
       attributes: {
-        exclude: ["password"],
+        exclude: ["password", "deletedAt"],
       },
     },
   },
