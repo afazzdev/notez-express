@@ -4,9 +4,9 @@ module.exports = {
     await queryInterface.createTable("notes", {
       id: {
         primaryKey: true,
-        autoIncrement: true,
         unique: true,
-        type: Sequelize.INTEGER,
+        defaultValue: Sequelize.literal("uuid_generate_v4()"),
+        type: Sequelize.UUID,
       },
       name: {
         type: Sequelize.STRING,
@@ -17,8 +17,9 @@ module.exports = {
         type: Sequelize.TEXT,
         allowNull: true,
       },
-      user_id: {
-        type: Sequelize.INTEGER,
+      userId: {
+        field: "user_id",
+        type: Sequelize.UUID,
         allowNull: false,
         references: {
           key: "id",
@@ -26,10 +27,12 @@ module.exports = {
         },
       },
       createdAt: {
+        field: "created_at",
         allowNull: false,
         type: Sequelize.DATE,
       },
       updatedAt: {
+        field: "updated_at",
         allowNull: false,
         type: Sequelize.DATE,
       },

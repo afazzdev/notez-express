@@ -1,10 +1,10 @@
-import { Model, DataTypes, Optional } from "sequelize";
+import { Model, DataTypes, Optional, literal } from "sequelize";
 import bcrypt from "bcrypt";
 import { sequelize } from "../../config/sequelize";
 import AppError from "../../utils/AppError";
 
 export interface UserAttributes {
-  id: number;
+  id: string;
   username: string;
   password: string;
 }
@@ -15,7 +15,7 @@ interface UserCreationAttributes
 export class User
   extends Model<UserAttributes, UserCreationAttributes>
   implements UserAttributes {
-  id!: number;
+  id!: string;
   username!: string;
   password!: string;
 
@@ -41,9 +41,9 @@ User.init(
   {
     id: {
       primaryKey: true,
-      autoIncrement: true,
       unique: true,
-      type: DataTypes.INTEGER,
+      defaultValue: literal("uuid_generate_v4()"),
+      type: DataTypes.UUID,
     },
     username: {
       type: DataTypes.STRING,

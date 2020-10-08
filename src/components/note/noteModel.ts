@@ -1,11 +1,11 @@
-import { Model, DataTypes, Optional } from "sequelize";
+import { Model, DataTypes, Optional, literal } from "sequelize";
 import { sequelize } from "../../config/sequelize";
 
 interface NoteAttributes {
-  id: number;
+  id: string;
   name: string;
   content: string;
-  user_id: number;
+  userId: string;
 }
 
 interface NoteCreationAttributes
@@ -14,10 +14,10 @@ interface NoteCreationAttributes
 export class Note
   extends Model<NoteAttributes, NoteCreationAttributes>
   implements NoteAttributes {
-  id!: number;
+  id!: string;
   name!: string;
   content!: string;
-  user_id!: number;
+  userId!: string;
 
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
@@ -27,9 +27,9 @@ Note.init(
   {
     id: {
       primaryKey: true,
-      autoIncrement: true,
       unique: true,
-      type: DataTypes.INTEGER,
+      defaultValue: literal("uuid_generate_v4()"),
+      type: DataTypes.UUID,
     },
     name: {
       type: DataTypes.STRING,
@@ -40,8 +40,9 @@ Note.init(
       type: DataTypes.TEXT,
       allowNull: true,
     },
-    user_id: {
-      type: DataTypes.INTEGER,
+    userId: {
+      field: "user_id",
+      type: DataTypes.UUID,
       allowNull: false,
       references: {
         key: "id",

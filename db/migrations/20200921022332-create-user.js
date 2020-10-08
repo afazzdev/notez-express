@@ -4,9 +4,9 @@ module.exports = {
     await queryInterface.createTable('users', {
       id: {
         primaryKey: true,
-        autoIncrement: true,
         unique: true,
-        type: Sequelize.INTEGER,
+        defaultValue: Sequelize.literal("uuid_generate_v4()"),
+        type: Sequelize.UUID,
       },
       username: {
         type: Sequelize.STRING,
@@ -21,13 +21,20 @@ module.exports = {
         allowNull: false,
       },
       createdAt: {
+        field: "created_at",
         allowNull: false,
         type: Sequelize.DATE,
       },
       updatedAt: {
+        field: "updated_at",
         allowNull: false,
         type: Sequelize.DATE,
       },
+      deletedAt: {
+        field: "deleted_at",
+        allowNull: true,
+        type: Sequelize.DATE,
+      }
     });
   },
   down: async (queryInterface, Sequelize) => {
