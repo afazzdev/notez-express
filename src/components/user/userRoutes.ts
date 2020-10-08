@@ -5,6 +5,7 @@ import userController from "./userController";
 
 class UserRouter extends BaseRouter {
   routes(): void {
+    // Auth
     this.router.post("/signup", catchAsync(authController.signUp));
     this.router.post("/signin", catchAsync(authController.signIn));
     this.router.get(
@@ -13,6 +14,7 @@ class UserRouter extends BaseRouter {
       catchAsync(userController.getProfile),
     );
 
+    // User
     this.router
       .route("/:id")
       .get(authController.authenticate, catchAsync(userController.getUser));

@@ -20,7 +20,7 @@ function createSendToken(
   user: User,
   statusCode?: 201 | 200 | number,
 ) {
-  const signToken = (id: number) => {
+  const signToken = (id: string) => {
     return jwt.sign({ id }, process.env.JWT_SECRET!, {
       expiresIn: process.env.JWT_EXPIRES_IN,
     });

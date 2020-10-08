@@ -8,7 +8,7 @@ class UserServices {
     return users;
   }
 
-  async getUser(pk: number): Promise<User | null> {
+  async getUser(pk: string): Promise<User | null> {
     const user = await User.findByPk(pk);
 
     return user;

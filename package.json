@@ -14,7 +14,6 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "formidable": "^1.2.2",
-    "glob": "^7.1.6",
     "jsonwebtoken": "^8.5.1",
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
@@ -27,6 +26,7 @@
     "dev:prod": "NODE_ENV=production nodemon -r dotenv/config src/server.ts",
     "build": "yarn clean && tsc -p .",
     "clean": "rm -rf build",
+    "sequelize": "sequelize",
     "migrate": "sequelize db:migrate",
     "migrate:undo": "sequelize db:migrate:undo",
     "migrate:undo:all": "sequelize db:migrate:undo:all"
