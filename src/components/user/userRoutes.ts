@@ -7,7 +7,11 @@ class UserRouter extends BaseRouter {
   routes(): void {
     this.router.post("/signup", catchAsync(authController.signUp));
     this.router.post("/signin", catchAsync(authController.signIn));
-    this.router.post("/get-profile", catchAsync(userController.getProfile));
+    this.router.get(
+      "/get-profile",
+      authController.authenticate,
+      catchAsync(userController.getProfile),
+    );
 
     this.router
       .route("/:id")
