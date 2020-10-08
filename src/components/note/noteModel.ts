@@ -3,8 +3,9 @@ import { sequelize } from "../../config/sequelize";
 
 interface NoteAttributes {
   id: string;
-  name: string;
+  title: string;
   content: string;
+  favorite: boolean;
   userId: string;
 }
 
@@ -15,8 +16,9 @@ export class Note
   extends Model<NoteAttributes, NoteCreationAttributes>
   implements NoteAttributes {
   id!: string;
-  name!: string;
+  title!: string;
   content!: string;
+  favorite!: boolean;
   userId!: string;
 
   public readonly createdAt!: Date;
@@ -31,14 +33,12 @@ Note.init(
       defaultValue: literal("uuid_generate_v4()"),
       type: DataTypes.UUID,
     },
-    name: {
-      type: DataTypes.STRING,
-      unique: true,
+    title: DataTypes.STRING,
+    content: DataTypes.TEXT,
+    favorite: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
       allowNull: false,
-    },
-    content: {
-      type: DataTypes.TEXT,
-      allowNull: true,
     },
     userId: {
       field: "user_id",
@@ -53,5 +53,6 @@ Note.init(
   {
     sequelize,
     modelName: "note",
+    underscored: true,
   },
 );

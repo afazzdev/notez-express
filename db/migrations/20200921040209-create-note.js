@@ -8,15 +8,14 @@ module.exports = {
         defaultValue: Sequelize.literal("uuid_generate_v4()"),
         type: Sequelize.UUID,
       },
-      name: {
-        type: Sequelize.STRING,
-        unique: true,
+      title: Sequelize.STRING,
+      content: Sequelize.TEXT,
+      favorite: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: false,
         allowNull: false,
       },
-      content: {
-        type: Sequelize.TEXT,
-        allowNull: true,
-      },
+
       userId: {
         field: "user_id",
         type: Sequelize.UUID,
@@ -26,6 +25,7 @@ module.exports = {
           model: "users",
         },
       },
+
       createdAt: {
         field: "created_at",
         allowNull: false,
