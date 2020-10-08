@@ -7,7 +7,7 @@ class NoteServices {
     return notes;
   }
 
-  async getNote(id: number) {
+  async getNote(id: string) {
     const note = await Note.findOne({
       where: {
         id,
