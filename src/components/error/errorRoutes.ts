@@ -7,7 +7,11 @@ export default <ErrorRequestHandler>function ErrorRoutes(err, _, res, __) {
   if (process.env.NODE_ENV === "development") {
     errorController.sendErrorDev(err, res);
   } else if (process.env.NODE_ENV === "production") {
-    let error = { ...err };
+    const { message, isOperational, status, statusCode } = err;
+    let error = Object.assign(
+      { message, isOperational, status, statusCode },
+      err,
+    );
 
     errorController.sendErrorProd(error, res);
   }
