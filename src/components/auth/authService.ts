@@ -1,3 +1,4 @@
+import { UniqueConstraintError } from "sequelize";
 import AppError from "../../utils/AppError";
 import { User } from "../user";
 
@@ -21,8 +22,14 @@ class AuthService {
 
       return newUser;
     } catch (error) {
+      if (error instanceof UniqueConstraintError) {
+        throw new AppError(
+          "Username sudah dipakai! gunakan username lain!",
+          400,
+        );
+      }
       console.trace("SignUp error: ", error);
-      throw new AppError("Something were wrong", 400);
+      throw new AppError("Something were wrong!", 400);
     }
   }
 

@@ -20,7 +20,7 @@ class ErrorController {
       });
     } else {
       // 1) Log to the console
-      console.error("ERROR!");
+      console.error("ERROR!", err);
 
       //2) Send generic message
       res.status(500).json({
