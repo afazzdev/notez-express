@@ -27,16 +27,20 @@ class NoteServices {
   }
 
   async editNote(id: string, userId: string, body: any) {
-    const note = await this.getNote(id);
-    if (note?.userId === userId) {
-      await note.update(body);
+    try {
+      const note = await this.getNote(id);
+      if (note?.userId === userId) {
+        await note.update(body);
 
-      return note;
-    } else {
-      throw new AppError(
-        "Anda tidak memiliki akses untuk melakukan perintah ini!",
-        400,
-      );
+        return note;
+      } else {
+        throw new AppError(
+          "Anda tidak memiliki akses untuk melakukan perintah ini!",
+          400,
+        );
+      }
+    } catch (error) {
+      throw new AppError("unknow error", 500);
     }
   }
 }
