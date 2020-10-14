@@ -2,9 +2,13 @@ import { Request, Response } from "express";
 import { created, ok } from "../../utils/responseJson";
 import noteServices from "./noteServices";
 
+import { GetNotesFilter } from "./dto/getNotesFilter";
+
 class NoteController {
-  async getNotes(_: Request, res: Response) {
-    const notes = await noteServices.getNotes();
+  async getNotes(req: Request, res: Response) {
+    const notes = await noteServices.getNotes(
+      (req.query as unknown) as GetNotesFilter,
+    );
 
     return ok(res, { data: notes });
   }

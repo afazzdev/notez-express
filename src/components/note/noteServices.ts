@@ -1,9 +1,18 @@
-import AppError from "../../utils/AppError";
 import { Note } from "./noteModel";
 
+import AppError from "../../utils/AppError";
+import { GetNotesFilter } from "./dto/getNotesFilter";
+
 class NoteServices {
-  async getNotes() {
+  async getNotes(filter: GetNotesFilter) {
+    let where: Partial<Note> = {};
+
+    if (filter.userId) {
+      where.userId = filter.userId;
+    }
+
     const notes = await Note.findAll({
+      where,
       order: [["updatedAt", "DESC"]],
     });
 
