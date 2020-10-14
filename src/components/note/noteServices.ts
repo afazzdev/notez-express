@@ -3,7 +3,9 @@ import { Note } from "./noteModel";
 
 class NoteServices {
   async getNotes() {
-    const notes = await Note.findAll();
+    const notes = await Note.findAll({
+      order: [["updatedAt", "DESC"]],
+    });
 
     return notes;
   }
@@ -40,7 +42,7 @@ class NoteServices {
         );
       }
     } catch (error) {
-      throw new AppError("unknow error", 500);
+      throw new AppError("unknown error", 500);
     }
   }
 }
