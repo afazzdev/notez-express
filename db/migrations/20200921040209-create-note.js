@@ -3,13 +3,19 @@ module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable("notes", {
       id: {
+        type: Sequelize.UUID,
         primaryKey: true,
         unique: true,
-        defaultValue: Sequelize.literal("uuid_generate_v4()"),
-        type: Sequelize.UUID,
+        defaultValue: Sequelize.UUIDV4,
       },
-      title: Sequelize.STRING,
-      content: Sequelize.TEXT,
+      title: {
+        type: Sequelize.STRING,
+        defaultValue: "",
+      },
+      content: {
+        type: Sequelize.TEXT,
+        defaultValue: "",
+      },
       favorite: {
         type: Sequelize.BOOLEAN,
         defaultValue: false,

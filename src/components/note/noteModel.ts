@@ -1,4 +1,4 @@
-import { Model, DataTypes, Optional, literal } from "sequelize";
+import { Model, DataTypes, Optional } from "sequelize";
 import { sequelize } from "../../config/sequelize";
 
 interface NoteAttributes {
@@ -28,13 +28,19 @@ export class Note
 Note.init(
   {
     id: {
+      type: DataTypes.UUID,
       primaryKey: true,
       unique: true,
-      defaultValue: literal("uuid_generate_v4()"),
-      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
     },
-    title: DataTypes.STRING,
-    content: DataTypes.TEXT,
+    title: {
+      type: DataTypes.STRING,
+      defaultValue: "",
+    },
+    content: {
+      type: DataTypes.TEXT,
+      defaultValue: "",
+    },
     favorite: {
       type: DataTypes.BOOLEAN,
       defaultValue: false,

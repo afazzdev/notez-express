@@ -1,4 +1,4 @@
-import { Model, DataTypes, Optional, literal } from "sequelize";
+import { Model, DataTypes, Optional } from "sequelize";
 import bcrypt from "bcrypt";
 import { sequelize } from "../../config/sequelize";
 import AppError from "../../utils/AppError";
@@ -40,10 +40,10 @@ export class User
 User.init(
   {
     id: {
+      type: DataTypes.UUID,
       primaryKey: true,
       unique: true,
-      defaultValue: literal("uuid_generate_v4()"),
-      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
     },
     username: {
       type: DataTypes.STRING,
