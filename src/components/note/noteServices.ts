@@ -5,10 +5,12 @@ import { GetNotesFilter } from "./dto/getNotesFilter";
 
 class NoteServices {
   async getNotes(filter: GetNotesFilter) {
-    let where: Partial<Note> = {};
+    const filterCopy = filter as GetNotesFilter & { [key: string]: any };
+    const { ...rest } = filter;
+    let where: Partial<Note> & { [key: string]: any } = {};
 
-    if (filter.userId) {
-      where.userId = filter.userId;
+    for (let key of Object.keys(rest)) {
+      where[key] = filterCopy[key];
     }
 
     const notes = await Note.findAll({
