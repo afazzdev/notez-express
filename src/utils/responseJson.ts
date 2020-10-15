@@ -41,16 +41,18 @@ const responseGeneric = <T>(
 
 export const ok = <T>(
   res: Response,
-  props: Pick<IResponseJson<T>, "data" | "status" | "token">,
-) => responseGeneric(res, props, 200);
+  data: Pick<IResponseJson<T>, "data" | "status" | "token">,
+) => responseGeneric(res, data, 200);
 
 export const created = <T>(
   res: Response,
-  props: Pick<IResponseJson<T>, "data" | "status" | "token">,
-) => responseGeneric(res, props, 201);
+  data: Pick<IResponseJson<T>, "data" | "status" | "token">,
+) => responseGeneric(res, data, 201);
+
+export const noContent = (res: Response) => responseGeneric(res, {}, 204);
 
 export const error = <T>(
   res: Response,
-  props: Omit<IResponseJson<T>, "data" | "token">,
+  data: Omit<IResponseJson<T>, "data" | "token">,
   statusCode: 400 | 401 | 500 | number,
-) => responseGeneric(res, props, statusCode);
+) => responseGeneric(res, data, statusCode);
