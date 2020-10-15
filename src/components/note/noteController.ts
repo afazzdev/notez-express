@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { created, ok } from "../../utils/responseJson";
+import { created, ok, noContent } from "../../utils/responseJson";
 import noteServices from "./noteServices";
 
 import { GetNotesFilter } from "./dto/getNotesFilter";
@@ -37,6 +37,12 @@ class NoteController {
     return ok(res, {
       data: edittedNote,
     });
+  }
+
+  async deleteNote(req: Request, res: Response) {
+    await noteServices.deleteNote(req.user?.id!, req.params.id);
+
+    return noContent(res);
   }
 }
 

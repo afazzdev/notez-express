@@ -9,7 +9,11 @@ class NoteRoutes extends BaseRouter {
     this.router
       .route("/:id")
       .get(catchAsync(noteController.getNote))
-      .patch(authController.authenticate, catchAsync(noteController.editNote));
+      .patch(authController.authenticate, catchAsync(noteController.editNote))
+      .delete(
+        authController.authenticate,
+        catchAsync(noteController.deleteNote),
+      );
     this.router
       .route("/")
       .get(catchAsync(noteController.getNotes))

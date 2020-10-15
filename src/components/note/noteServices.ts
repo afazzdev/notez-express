@@ -56,6 +56,23 @@ class NoteServices {
       throw new AppError("unknown error", 500);
     }
   }
+
+  async deleteNote(userId: string, id: string) {
+    try {
+      const note = await Note.findByPk(id);
+
+      if (note?.userId === userId) {
+        return note.destroy();
+      } else {
+        throw new AppError(
+          "Anda tidak memiliki akses untuk menghapus note ini!",
+          401,
+        );
+      }
+    } catch (e) {
+      throw new AppError("Unknown error occured!", 500);
+    }
+  }
 }
 
 export default new NoteServices();
