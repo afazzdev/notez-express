@@ -6,7 +6,7 @@ import { GetNotesFilter } from "./dto/getNotesFilter";
 class NoteServices {
   async getNotes(filter: GetNotesFilter) {
     const filterCopy = filter as GetNotesFilter & { [key: string]: any };
-    const { ...rest } = filter;
+    const { limit, skip: offset, ...rest } = filter;
     let where: Partial<Note> & { [key: string]: any } = {};
 
     for (let key of Object.keys(rest)) {
@@ -15,6 +15,8 @@ class NoteServices {
 
     const notes = await Note.findAll({
       where,
+      limit,
+      offset,
       order: [["updatedAt", "DESC"]],
     });
 

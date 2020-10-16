@@ -1,8 +1,4 @@
 import app from "./app";
-import dotenv from "dotenv";
-dotenv.config({
-  path: __dirname + "/.env",
-});
 
 process.on("uncaughtException", (err) => {
   console.log(err.name, err.message);
