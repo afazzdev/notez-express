@@ -25,6 +25,7 @@
     "dev": "NODE_ENV=development nodemon -r dotenv/config src/server.ts",
     "dev:prod": "NODE_ENV=production nodemon -r dotenv/config src/server.ts",
     "build": "yarn clean && tsc -p .",
+    "postinstall": "npx sequelize-cli db:migrate",
     "clean": "rm -rf build",
     "sequelize": "sequelize",
     "migrate": "sequelize db:migrate",

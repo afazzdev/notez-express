@@ -1,7 +1,6 @@
 import path from "path";
 import express, { Application } from "express";
 import cors from "cors";
-import morgan from "morgan";
 
 import note from "./components/note";
 import user from "./components/user";
@@ -33,7 +32,7 @@ class App {
     this.app.use(passport.initialize());
 
     if (process.env.NODE_ENV !== "production") {
-      this.app.use(morgan("dev"));
+      this.app.use(require("morgan")("dev"));
     }
   }
 
