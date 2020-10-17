@@ -22,13 +22,13 @@
   },
   "scripts": {
     "start": "NODE_ENV=production node build/server.js",
-    "dev": "NODE_ENV=development nodemon -r dotenv/config src/server.ts",
-    "dev:prod": "NODE_ENV=production nodemon -r dotenv/config src/server.ts",
-    "build": "yarn clean && tsc -p .",
-    "postinstall": "npx sequelize-cli db:migrate",
+    "dev": "dotenv -e .env -e .env.development.local nodemon -r dotenv/config src/server.ts",
+    "dev:prod": "dotenv -e .env -e .env.production.local nodemon -r dotenv/config src/server.ts",
+    "build": "yarn clean && tsc -p . && migrate:server",
     "clean": "rm -rf build",
+    "migrate:server": "npx sequelize-cli db:migrate",
     "sequelize": "sequelize",
-    "migrate": "sequelize db:migrate",
+    "migrate": "dotenv -e .env -e .env.development.local sequelize db:migrate",
     "migrate:undo": "sequelize db:migrate:undo",
     "migrate:undo:all": "sequelize db:migrate:undo:all"
   },
